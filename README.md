@@ -6,12 +6,6 @@
 CREWNYX is a secure freelancer based platform that eliminates trust issues between clients and creators.
 It ensures a "Proof-of-Work" system where clients can verify results before payment, and creators are guaranteed their earnings.
 
-## 🚀 Quick Start
-To get this project running locally, follow these steps:
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/VeneelaHub/crewnyx-glow-ui.git](https://github.com/VeneelaHub/crewnyx-glow-ui.git)
-
 ## 🛡️ Why CREWYNX ?
 * **Proof-of-Work:** Clients can verify the final output via a secure preview system before payment.
 * **Anti-Theft Protection:** Project files are encrypted and non-downloadable until the transaction is complete.
