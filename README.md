@@ -1,59 +1,44 @@
 
-# 🌟 CREWNYX - Glow UI
-**Product Name:** CREWNYX
-# Skill Bridge
+#  Crewnyx ✨
+**Empowering Trust Between Creators & Clients**
 
-## Overview:
-crewnyx is a secure freelancer-based platform designed to remove trust issues between clients and creators. It introduces a **Proof-of-Work verification system**, allowing clients to preview completed work securely before payment, while ensuring creators receive guaranteed compensation.
-
-This is the platform focuses on **security, transparency, and fair payment flow**, creating a win-win ecosystem for both freelancers and clients.
-
-## Why Crewnyx ?
-### Proof of Work Verification
-Clients can securely preview completed work before making payment.
-
-### Anti-Theft Protection
-Uploaded project files are encrypted and remain **non-downloadable** until payment is completed.
-
-### Payment Security
-Ensures creators receive payment while clients receive verified, quality work.
-
-### Trust-Based Marketplace
-A secure workflow that protects both freelancers and clients.
+##  Overview : 
+Crewnyx is a secure freelancer-based platform designed to eliminate trust issues in the creative industry. Through our unique **Proof-of-Work verification system**, clients can securely preview completed projects before payment, while creators are guaranteed compensation before their work is delivered.
 
 
-## Key Features:
+##  Why Crewnyx?
+*   **Proof of Work:** Preview final results without risk.
+*   **Anti-Theft Protection:** Files are encrypted and non-downloadable until the transaction is complete.
+*   **Guaranteed Payment:** Ensures creators get paid for their verified work.
+*   **Fair Ecosystem:** A transparent workflow that protects both parties.
+
+
+
+## 🛠 Key Features
+
+###  Discovery & Trust
+*   **Freelancer Marketplace:** Search and filter creators by portfolio and niche.
+*   **Smart Rating System:** Automated global ranking based on client reviews after project completion.
+
+### Secure Workflow
+*   **Project Upload:** Freelancers upload work (video/files/images) to secure cloud storage.
+*   **Unique Verification:** System generates a secure code for clients to access a private preview.
+*   **Locked Assets:** Preview is enabled, but downloads remain disabled by default.
+
+### 💳 Payment Unlock System
+*   **Before Payment:** Restricted "Preview-Only" mode with encrypted access.
+*   **After Payment:** Instant access to the "Download" button.
+*   **Flexible Billing:** Supports both Down Payments and Full Payments via Stripe/Razorpay.
+
+### Smart Rating System
+- Client reviews after completion
+- Ratings update freelancer global ranking automatically
+
 ### Freelancer Discovery
 - Search freelancers
 - Filter by portfolio
 - Rating based sorting
 - Profile visibility system
-
-### Project Completion Upload
-- Freelancers upload completed work (video / screenshot / file)
-- System generates a **Unique Verification Code**
-- Preview enabled, download disabled until payment
-
-### Secure Verification System
-- Client enters unique code
-- Secure preview access granted
-- Private encrypted access
-
-### Payment Unlock System
-**Before Payment**
-- Preview only  
-- Download disabled
-
-**After Payment**
-- Full access enabled  
-- Download button activated
-Supports:
-- Down Payment  
-- Full Payment
-
-### Smart Rating System
-- Client reviews after completion
-- Ratings update freelancer global ranking automatically
 
 ## Tech Stack
 ### Frontend:
@@ -73,14 +58,14 @@ Supports:
 - Private secure links
 - Access controlled preview
 
-## Project Structure
-crewnyx/
-│── frontend/
-│── api/
-│── database/
-│── docs/
-│── README.md
-
+  
+## 📂 Project Structure
+crewnyx-glow-ui/
+├── frontend/
+├── backend/
+├── api/
+├── database/
+└── README.md
 
 ## Security Features
 - Encrypted file storage  
