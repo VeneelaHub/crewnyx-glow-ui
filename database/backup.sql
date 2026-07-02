@@ -1,198 +1,167 @@
 -- =====================================================
--- BACKUP & DOCUMENTATION MODULE
--- FREELANCER MARKETPLACE APP
+-- BACKUP & DOCUMENTATION MODULE - SUPABASE (PostgreSQL)
 -- =====================================================
 
-USE freelancer_app;
+-- NOTE: "USE freelancer_app" removed — not needed in Supabase
+
 
 -- =====================================================
 -- 1. DATABASE BACKUP TABLES
 -- =====================================================
 
--- USERS BACKUP
+CREATE TABLE IF NOT EXISTS users_backup AS
+SELECT * FROM users;
 
-CREATE TABLE users_backup AS
+CREATE TABLE IF NOT EXISTS gigs_backup AS
+SELECT * FROM gigs;
 
-SELECT *
-FROM users;
+CREATE TABLE IF NOT EXISTS orders_backup AS
+SELECT * FROM orders;
 
--- GIGS BACKUP
+CREATE TABLE IF NOT EXISTS payments_backup AS
+SELECT * FROM payments;
 
-CREATE TABLE gigs_backup AS
+CREATE TABLE IF NOT EXISTS subscriptions_backup AS
+SELECT * FROM subscriptions;
 
-SELECT *
-FROM gigs;
-
--- ORDERS BACKUP
-
-CREATE TABLE orders_backup AS
-
-SELECT *
-FROM orders;
-
--- PAYMENTS BACKUP
-
-CREATE TABLE payments_backup AS
-
-SELECT *
-FROM payments;
-
--- SUBSCRIPTIONS BACKUP
-
-CREATE TABLE subscriptions_backup AS
-
-SELECT *
-FROM subscriptions;
 
 -- =====================================================
 -- 2. VERIFY BACKUP TABLES
 -- =====================================================
 
 SELECT * FROM users_backup;
-
 SELECT * FROM gigs_backup;
-
 SELECT * FROM orders_backup;
-
 SELECT * FROM payments_backup;
-
 SELECT * FROM subscriptions_backup;
 
--- =====================================================
--- 3. EXPORT DATABASE BACKUP COMMAND
--- =====================================================
-
--- Run this in CMD / Terminal
-
--- mysqldump -u root -p freelancer_app > freelancer_backup.sql
 
 -- =====================================================
--- 4. RESTORE DATABASE COMMAND
+-- 3. EXPORT BACKUP COMMAND (run in Terminal, not here)
 -- =====================================================
 
--- Run this in CMD / Terminal
+-- pg_dump -U postgres -d postgres > supabase_backup.sql
 
--- mysql -u root -p freelancer_app < freelancer_backup.sql
-
--- =====================================================
--- 5. SHOW ALL TABLES
--- =====================================================
-
-SHOW TABLES;
 
 -- =====================================================
--- 6. DOCUMENTATION : USERS TABLE
+-- 4. RESTORE BACKUP COMMAND (run in Terminal, not here)
 -- =====================================================
 
-DESCRIBE users;
+-- psql -U postgres -d postgres < supabase_backup.sql
+
 
 -- =====================================================
--- 7. DOCUMENTATION : GIGS TABLE
+-- 5. SHOW ALL TABLES (replaces SHOW TABLES)
 -- =====================================================
 
-DESCRIBE gigs;
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public'
+ORDER BY table_name;
+
 
 -- =====================================================
--- 8. DOCUMENTATION : ORDERS TABLE
+-- 6-10. DOCUMENT ALL TABLES (replaces DESCRIBE)
 -- =====================================================
 
-DESCRIBE orders;
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+AND table_name = 'users';
+
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+AND table_name = 'gigs';
+
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+AND table_name = 'orders';
+
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+AND table_name = 'payments';
+
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+AND table_name = 'subscriptions';
+
 
 -- =====================================================
--- 9. DOCUMENTATION : PAYMENTS TABLE
--- =====================================================
-
-DESCRIBE payments;
-
--- =====================================================
--- 10. DOCUMENTATION : SUBSCRIPTIONS TABLE
--- =====================================================
-
-DESCRIBE subscriptions;
-
--- =====================================================
--- 11. DOCUMENTATION QUERY
--- =====================================================
-
-SELECT
-
-    TABLE_NAME,
-
-    COLUMN_NAME,
-
-    DATA_TYPE,
-
-    IS_NULLABLE,
-
-    COLUMN_KEY
-
-FROM INFORMATION_SCHEMA.COLUMNS
-
-WHERE TABLE_SCHEMA = 'freelancer_app';
-
--- =====================================================
--- 12. BACKUP CREATION DATE
+-- 11. FULL DOCUMENTATION QUERY
 -- =====================================================
 
 SELECT
-    NOW() AS backup_created_time;
+    table_name,
+    column_name,
+    data_type,
+    is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+ORDER BY table_name, ordinal_position;
+
 
 -- =====================================================
--- 13. TOTAL DATABASE TABLES
+-- 12. BACKUP CREATION TIME
 -- =====================================================
 
-SELECT
-    COUNT(*) AS total_tables
+SELECT NOW() AS backup_created_time;
 
-FROM INFORMATION_SCHEMA.TABLES
 
-WHERE TABLE_SCHEMA = 'freelancer_app';
+-- =====================================================
+-- 13. TOTAL NUMBER OF TABLES
+-- =====================================================
+
+SELECT COUNT(*) AS total_tables
+FROM information_schema.tables
+WHERE table_schema = 'public';
+
 
 -- =====================================================
 -- 14. TABLE STORAGE INFORMATION
 -- =====================================================
 
 SELECT
+    relname AS table_name,
+    ROUND(pg_total_relation_size(relid) / 1024.0, 2) AS table_size_kb
+FROM pg_catalog.pg_statio_user_tables
+ORDER BY pg_total_relation_size(relid) DESC;
 
-    table_name,
-
-    ROUND((data_length + index_length)/1024,2)
-    AS table_size_kb
-
-FROM information_schema.tables
-
-WHERE table_schema = 'freelancer_app';
 
 -- =====================================================
--- 15. VIEW DATABASE STATUS
+-- 15. VIEW TABLE STATUS (replaces SHOW TABLE STATUS)
 -- =====================================================
-
-SHOW TABLE STATUS;
-
--- =====================================================
--- 16. CREATE DATABASE DOCUMENTATION VIEW
--- =====================================================
-
-CREATE VIEW database_documentation AS
 
 SELECT
+    relname AS table_name,
+    n_live_tup AS live_rows,
+    n_dead_tup AS dead_rows,
+    last_vacuum,
+    last_analyze
+FROM pg_stat_user_tables
+ORDER BY relname;
 
-    TABLE_NAME,
 
-    COLUMN_NAME,
+-- =====================================================
+-- 16. DATABASE DOCUMENTATION VIEW
+-- =====================================================
 
-    DATA_TYPE,
+CREATE OR REPLACE VIEW database_documentation AS
+SELECT
+    table_name,
+    column_name,
+    data_type,
+    is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
+ORDER BY table_name, ordinal_position;
 
-    COLUMN_KEY
-
-FROM INFORMATION_SCHEMA.COLUMNS
-
-WHERE TABLE_SCHEMA = 'freelancer_app';
 
 -- =====================================================
 -- 17. DISPLAY DOCUMENTATION VIEW
 -- =====================================================
 
-SELECT *
-FROM database_documentation;
-
+SELECT * FROM database_documentation;
