@@ -1,0 +1,29 @@
+
+### Add Student
+POST http://localhost:8080/api/students
+Content-Type: application/json
+
+{
+  "name": "Gowtham",
+  "email": "gowtham@gmail.com",
+  "course": "Java"
+}
+
+### Get All Students
+GET http://localhost:8080/api/students
+
+### Get Student By ID
+GET http://localhost:8080/api/students/1
+
+### Update Student
+PUT http://localhost:8080/api/students/1
+Content-Type: application/json
+
+{
+  "name": "Gowtham Srivas",
+  "email": "gowtham@gmail.com",
+  "course": "Spring Boot"
+}
+
+### Delete Student
+DELETE http://localhost:8080/api/students/
